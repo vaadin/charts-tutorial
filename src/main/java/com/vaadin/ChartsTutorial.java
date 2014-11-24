@@ -122,12 +122,6 @@ public class ChartsTutorial extends UI
         conf.addyAxis(humidityYAxis);
         humidity.setyAxis(humidityYAxis);
 
-        Options3d options3d = new Options3d();
-        options3d.setAlpha(10);
-        options3d.setBeta(10);
-        options3d.setEnabled(true);
-        conf.getChart().setOptions3d(options3d);
-
         return chart;
     }
 

@@ -1,4 +1,4 @@
 *.iml
 target
-VAADIN/widgetsets
+src/main/webapp/VAADIN/widgetsets
 .DS_Store

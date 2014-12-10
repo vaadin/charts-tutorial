@@ -903,7 +903,7 @@
  */
 
 .v-vaadin-version:after {
-	content: "7.3.4";
+	content: "7.3.6";
 }
 
 .v-widget {
@@ -8118,6 +8118,7 @@ div.v-layout.v-horizontal.v-widget {
 	border-left: 1px solid #d4d4d4;
 	overflow: hidden;
 	height: 37px;
+	vertical-align: middle;
 }
 
 .mytheme .v-table-cell-content:first-child {
@@ -8221,12 +8222,12 @@ div.v-layout.v-horizontal.v-widget {
 }
 
 .mytheme .v-table-header-cell-asc .v-table-sort-indicator:before {
-	content: "\f0dd";
+	content: "\f0de";
 	font-family: FontAwesome;
 }
 
 .mytheme .v-table-header-cell-desc .v-table-sort-indicator:before {
-	content: "\f0de";
+	content: "\f0dd";
 	font-family: FontAwesome;
 }
 
@@ -8431,44 +8432,27 @@ div.v-layout.v-horizontal.v-widget {
 	outline: none;
 }
 
-.mytheme .v-table-row-drag-middle td:first-child:before {
-	content: "";
-	display: block;
-	position: absolute;
-	z-index: 1;
-	height: 38px;
-	left: 0;
-	right: 0;
-	background: #197de1;
-	opacity: 0.2;
-	filter: alpha(opacity=20) ;
+.mytheme .v-table-row-drag-middle .v-table-cell-content {
+	background-color: #d1e5f9;
+	color: #214060;
 }
 
-.mytheme .v-table-row-drag-top td:first-child:before, .mytheme .v-table-row-drag-bottom td:first-child:after {
-	content: "\2022";
-	display: block;
-	position: absolute;
-	height: 2px;
-	left: 0;
-	right: 0;
-	background: #197de1;
-	font-size: 32px;
-	line-height: 2px;
-	color: #197de1;
-	text-indent: -4px;
-	text-shadow: 0 0 1px white, 0 0 1px white;
+.mytheme .v-table-row-drag-bottom td.v-table-cell-content {
+	border-bottom: 2px solid #197de1;
+	height: 35px;
 }
 
-.mytheme .v-table-row-drag-top td:first-child:before {
+.mytheme .v-table-row-drag-bottom .v-table-cell-wrapper {
+	margin-bottom: -2px;
+}
+
+.mytheme .v-table-row-drag-top td.v-table-cell-content {
+	border-top: 2px solid #197de1;
+	height: 36px;
+}
+
+.mytheme .v-table-row-drag-top .v-table-cell-wrapper {
 	margin-top: -1px;
-}
-
-.v-ff .mytheme .v-table-row-drag-top td:first-child:before, .v-ff .mytheme .v-table-row-drag-bottom td:first-child:after {
-	line-height: 1px;
-}
-
-.v-ie .mytheme .v-table-row-drag-top td:first-child:before, .v-ie .mytheme .v-table-row-drag-bottom td:first-child:after {
-	line-height: 0;
 }
 
 .mytheme .v-table-no-stripes .v-table-row, .mytheme .v-table-no-stripes .v-table-row-odd {
@@ -8487,6 +8471,10 @@ div.v-layout.v-horizontal.v-widget {
 .mytheme .v-table-no-horizontal-lines .v-table-cell-content {
 	border-top: none;
 	border-bottom: none;
+}
+
+.mytheme .v-table-no-horizontal-lines .v-table-row-drag-top .v-table-cell-content, .mytheme .v-table-no-horizontal-lines .v-table-row-drag-bottom .v-table-cell-content {
+	height: 36px;
 }
 
 .mytheme .v-table-no-header .v-table-header-wrap {
@@ -8559,10 +8547,6 @@ div.v-layout.v-horizontal.v-widget {
 	margin-top: -16px;
 }
 
-.mytheme .v-table-compact .v-table-row-drag-middle td:first-child:before, .mytheme .v-table-small .v-table-row-drag-middle td:first-child:before {
-	height: 32px;
-}
-
 .mytheme .v-table-compact.v-treetable .v-table-cell-wrapper, .mytheme .v-table-small.v-treetable .v-table-cell-wrapper {
 	padding-left: 0;
 	padding-right: 0;
@@ -8583,6 +8567,10 @@ div.v-layout.v-horizontal.v-widget {
 	padding-right: 6px;
 }
 
+.mytheme .v-table-compact .v-table-row-drag-top .v-table-cell-content, .mytheme .v-table-compact .v-table-row-drag-bottom .v-table-cell-content, .mytheme .v-table-small .v-table-row-drag-top .v-table-cell-content, .mytheme .v-table-small .v-table-row-drag-bottom .v-table-cell-content {
+	height: 30px;
+}
+
 .mytheme .v-table-small {
 	font-size: 14px;
 }
@@ -8597,6 +8585,10 @@ div.v-layout.v-horizontal.v-widget {
 	box-sizing: content-box;
 	padding-left: 0;
 	padding-right: 0;
+}
+
+.mytheme .v-treetable [class*="caption-container"], .mytheme .v-treetable [class*="footer-container"] {
+	min-height: 14px;
 }
 
 .mytheme .v-treetable [class*="cell-wrapper"] {
@@ -11696,6 +11688,7 @@ div.v-layout.v-horizontal.v-widget {
 	padding: 0 37px 0 19px;
 	cursor: pointer;
 	position: relative;
+	overflow: hidden;
 	text-shadow: 0 2px 0 rgba(0, 0, 0, 0.05);
 	-webkit-transition: background-color 300ms, color 60ms;
 	-moz-transition: background-color 300ms, color 60ms;
@@ -12007,6 +12000,7 @@ div.v-layout.v-horizontal.v-widget {
 	height: 37px !important;
 	padding-top: 0;
 	padding-bottom: 0;
+	-webkit-backface-visibility: hidden;
 }
 
 .mytheme .v-ui[width-range~="0-800px"] .valo-menu .v-menubar-user-menu {
@@ -12019,6 +12013,7 @@ div.v-layout.v-horizontal.v-widget {
 	height: 37px;
 	color: #97bee5;
 	max-width: 30%;
+	-webkit-backface-visibility: hidden;
 }
 
 .mytheme .v-ui[width-range~="0-800px"] .valo-menu .v-menubar-user-menu .v-menubar-menuitem {

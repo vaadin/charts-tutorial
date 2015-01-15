@@ -17,7 +17,7 @@ Make sure you have "Eclipse IDE for Java EE Developers" and Maven integration "m
 To checkout and run the project from Eclipse, do:
 - File -> Import...
 - Check out Maven Projects from CMS
-- Choose Git from SCM menu and set URL to git://github.com/vaadin-samples/testbench-tutorial.git
+- Choose Git from SCM menu and set URL to git://github.com/vaadin/charts-tutorial
   - If you do not see "Git" in the SCM menu, click "Find more SCM connectors in the m2e Marketplace" and install "m2e-egit"
 - Now you should have a "charts-tutorial" project in your workspace
 - To run it, right click and choose Run As -> Run on Server

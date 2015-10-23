@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+  <link rel="import" href="bower_components/vaadin-charts/vaadin-line-chart.html">
+</head>
+<body>
+  <vaadin-line-chart>
+    <title>Shoe size per age for boys and girls</title>
+    <x-axis>
+      <title>Shoe size (EU)</title>
+    </x-axis>
+    <y-axis>
+      <title>Age (years)</title>
+    </y-axis>
+    <data-series name="Girls">
+      <color>#FF69B4</color>
+      <data>
+        [17, 0.3], [18, 0.7], [19, 0.8], [20, 1.0], [21, 1.3], [22, 1.5],
+        [23, 2.0], [24, 2.5], [25, 3.0], [26, 3.5], [27, 4.0], [28, 4.5],
+        [29, 5.0], [30, 5.5], [31, 6.5], [32, 7.0], [33, 8.0], [34, 9.0],
+        [35, 10.0], [36, 11.0]
+      </data>
+    </data-series>
+    <data-series name="Boys">
+      <color>#0000FF</color>
+      <data>
+        [17, 0.3], [18, 0.6], [19, 0.8], [20, 0.9], [21, 1.1], [22, 1.3],
+        [23, 1.7], [24, 2.0], [25, 2.5], [26, 3.0], [27, 3.5], [28, 4.0],
+        [29, 4.5], [30, 5.0], [31, 5.5], [32, 6.5], [33, 7.5], [34, 8.0],
+        [35, 9.0], [36, 10.0], [37, 11.0]
+      </data>
+    </data-series>
+  </vaadin-line-chart>
+  <weather-chart></weather-chart>
+  <dom-module id="weather-chart">
+     <template>
+        <iron-ajax id="humidityFetcher"
+                    url="data/humidity"
+                    handle-as="json"
+                    last-response="{{humidityData}}"
+                    debounce-duration="300"></iron-ajax>
+        <iron-ajax id="temperatureFetcher"
+                    url="data/temperature"
+                    handle-as="json"
+                    last-response="{{temperatureData}}"
+                    debounce-duration="300"></iron-ajax>
+        <vaadin-line-chart>
+          <title>Turku, Finland 2013</title>
+          <x-axis name="Temperature" type="datetime">
+            <title>Date</title>
+          </x-axis>
+          <y-axis>
+            <title>Temperature (°C)</title>
+          </y-axis>
+          <y-axis id="humidity">
+            <title>Humidity (%)</title>
+            <min>0</min>
+            <opposite>true</opposite>
+          </y-axis>
+          <data-series name="Humidity" type="column" data=[[humidityData]] y-axis = "humidity">
+          </data-series>
+          <data-series name="Temperature" data=[[temperatureData]]>
+          </data-series>
+        </vaadin-line-chart>
+    </template>
+    <script>
+      Polymer({
+        is: 'weather-chart',
+        properties: {
+          temperatureData: Object,
+          humidityData: Object
+        },
+        attached: function() {
+          this.async(function() {
+            this.$.temperatureFetcher.generateRequest();
+            this.$.humidityFetcher.generateRequest();
+          }, 2);
+        }
+      });
+    </script>
+  </dom-module>
+</body>
+
+</html>

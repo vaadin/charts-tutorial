@@ -4,3 +4,5 @@ client/bower_components
 server/src/main/webapp/VAADIN/widgetsets
 .DS_Store
 .idea
+declarative/target
+declarative/src/main/webapp/VAADIN/widgetsets

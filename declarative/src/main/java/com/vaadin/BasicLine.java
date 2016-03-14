@@ -8,14 +8,10 @@ import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.declarative.Design;
 
 @DesignRoot(value = "basic_line.html")
-public class DeclarativeBasicLine extends VerticalLayout {
+public class BasicLine extends VerticalLayout {
 
     private Chart myChart;
-    public DeclarativeBasicLine(){
-        super();
-        this.setup();
-    }
-    private void setup() {
+    public BasicLine(){
         Design.setComponentMapper(new ChartComponentMapper());
         Design.read(this);
         ListSeries ls = new ListSeries();
@@ -39,5 +35,4 @@ public class DeclarativeBasicLine extends VerticalLayout {
                 4.8);
         myChart.getConfiguration().addSeries(ls);
     }
-
 }

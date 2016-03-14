@@ -20,7 +20,7 @@ public class ChartsTutorial extends UI
 
     @Override
     protected void init(VaadinRequest request) {
-        DeclarativeBasicLine line= new DeclarativeBasicLine();
+        BasicLine line= new BasicLine();
         setContent(line);
     }
 

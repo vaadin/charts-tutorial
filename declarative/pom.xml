@@ -92,7 +92,7 @@
         <dependency>
             <groupId>com.vaadin.addon</groupId>
             <artifactId>vaadin-charts</artifactId>
-            <version>3.0.0</version>
+            <version>3.1.0-rc1</version>
         </dependency>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>

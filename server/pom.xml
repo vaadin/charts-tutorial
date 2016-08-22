@@ -54,7 +54,7 @@
 		</dependency>
 		<!--
 		  Needed when using the widgetset optimizer (custom ConnectorBundleLoaderFactory).
-		  
+
 		  For widgetset compilation, vaadin-client-compiler is automatically added on the
 		  compilation classpath by vaadin-maven-plugin so normally there is no need for an
 		  explicit dependency.
@@ -92,7 +92,7 @@
 		<dependency>
 			<groupId>com.vaadin.addon</groupId>
 			<artifactId>vaadin-charts</artifactId>
-			<version>3.2.0-beta1</version>
+			<version>3.2.0-rc1</version>
 		</dependency>
 	</dependencies>
 
@@ -134,7 +134,7 @@
 				<configuration>
 					<extraJvmArgs>-Xmx512M -Xss1024k</extraJvmArgs>
 					<!-- <runTarget>mobilemail</runTarget> -->
-					<!-- We are doing "inplace" but into subdir VAADIN/widgetsets. This 
+					<!-- We are doing "inplace" but into subdir VAADIN/widgetsets. This
 						way compatible with Vaadin eclipse plugin. -->
 					<webappDirectory>src/main/webapp/VAADIN/widgetsets
 					</webappDirectory>
@@ -148,7 +148,7 @@
 					<noServer>true</noServer>
 					<!-- Remove draftCompile when project is ready -->
 					<draftCompile>false</draftCompile>
-					
+
 					<style>OBF</style>
 					<strict>true</strict>
 					<runTarget>http://localhost:8080/</runTarget>
@@ -157,7 +157,7 @@
 					<execution>
 						<configuration>
 							<!-- if you don't specify any modules, the plugin will find them -->
-							<!-- <modules> <module>com.vaadin.demo.mobilemail.gwt.ColorPickerWidgetSet</module> 
+							<!-- <modules> <module>com.vaadin.demo.mobilemail.gwt.ColorPickerWidgetSet</module>
 								</modules> -->
 						</configuration>
 						<goals>

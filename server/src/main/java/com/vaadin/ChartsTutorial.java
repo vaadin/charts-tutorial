@@ -1,6 +1,8 @@
 package com.vaadin;
 
-import java.util.Date;
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import javax.servlet.annotation.WebServlet;
 
@@ -10,6 +12,7 @@ import com.vaadin.addon.charts.Chart;
 import com.vaadin.addon.charts.model.AxisType;
 import com.vaadin.addon.charts.model.ChartType;
 import com.vaadin.addon.charts.model.Configuration;
+import com.vaadin.addon.charts.model.DataProviderSeries;
 import com.vaadin.addon.charts.model.DataSeries;
 import com.vaadin.addon.charts.model.DataSeriesItem;
 import com.vaadin.addon.charts.model.PlotOptionsColumn;
@@ -18,14 +21,12 @@ import com.vaadin.addon.charts.model.YAxis;
 import com.vaadin.addon.charts.model.style.SolidColor;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.data.provider.DataProvider;
+import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-import com.vaadin.v7.addon.charts.model.ContainerDataSeries;
-import com.vaadin.v7.data.Container.Filter;
-import com.vaadin.v7.data.Item;
-import com.vaadin.v7.data.util.BeanItemContainer;
 
 @Theme("mytheme")
 @SuppressWarnings("serial")
@@ -91,37 +92,31 @@ public class ChartsTutorial extends UI
 
         conf.getChart().setType(ChartType.LINE);
 
-        BeanItemContainer<WeatherInfo> weatherContainer =
-                new BeanItemContainer<WeatherInfo>(
-                        WeatherInfo.class, data.getWeatherData());
+        ListDataProvider<WeatherInfo> weatherDataProvider = DataProvider
+                .ofCollection(data.getWeatherData());
 
-        ContainerDataSeries temp = new ContainerDataSeries(weatherContainer);
+        weatherDataProvider.addFilter(point -> {
+            LocalDateTime date = LocalDateTime.ofInstant(point.getInstant(),
+                    ZoneId.of("Europe/Helsinki"));
+            return date.getDayOfWeek() == DayOfWeek.SUNDAY;
+        });
+
+        DataProviderSeries<WeatherInfo> temp = new DataProviderSeries<>(
+                weatherDataProvider);
         temp.setName("Temperature");
-        temp.setXPropertyId("date");    // will call WeatherInfo.getDate()
-        temp.setYPropertyId("maxTemp"); // will call WeatherInfo.getMaxTemp()
+        temp.setX(WeatherInfo::getInstant);
+        temp.setY(WeatherInfo::getMaxTemp);
 
         conf.getxAxis().setTitle("Date");
         conf.getxAxis().setType(AxisType.DATETIME);
         conf.getyAxis().setTitle("Temperature (°C)");
 
-        ContainerDataSeries humidity = new ContainerDataSeries(weatherContainer);
+        DataProviderSeries<WeatherInfo> humidity = new DataProviderSeries<>(
+                weatherDataProvider);
         humidity.setName("Humidity");
-        humidity.setXPropertyId("date");            // will call WeatherInfo.getDate()
-        humidity.setYPropertyId("meanHumidity");    // will call WeatherInfo.getMeanHumidity()
+        humidity.setX(WeatherInfo::getInstant);
+        humidity.setY(WeatherInfo::getMeanHumidity);
         humidity.setPlotOptions(new PlotOptionsColumn());
-
-        weatherContainer.addContainerFilter(new Filter() {
-            @Override
-            public boolean passesFilter(Object o, Item item) throws UnsupportedOperationException {
-                Date date = (Date)item.getItemProperty("date").getValue();
-                return date.getDay() == 0;
-            }
-
-            @Override
-            public boolean appliesToProperty(Object o) {
-                return "date".equals(o);
-            }
-        });
 
         conf.addSeries(humidity);
         conf.addSeries(temp);

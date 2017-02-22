@@ -1,0 +1,12 @@
+*.iml
+target/
+
+.idea
+.classpath
+.project
+.settings
+rebel.xml
+
+
+# Mac
+*.DS_Store

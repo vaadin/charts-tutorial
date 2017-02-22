@@ -1,12 +1,15 @@
 package com.vaadin;
 
+import java.util.Date;
+
+import javax.servlet.annotation.WebServlet;
+
 import com.vaadin.ChartsData.ShoeSizeInfo;
 import com.vaadin.ChartsData.WeatherInfo;
 import com.vaadin.addon.charts.Chart;
 import com.vaadin.addon.charts.model.AxisType;
 import com.vaadin.addon.charts.model.ChartType;
 import com.vaadin.addon.charts.model.Configuration;
-import com.vaadin.addon.charts.model.ContainerDataSeries;
 import com.vaadin.addon.charts.model.DataSeries;
 import com.vaadin.addon.charts.model.DataSeriesItem;
 import com.vaadin.addon.charts.model.PlotOptionsColumn;
@@ -15,17 +18,14 @@ import com.vaadin.addon.charts.model.YAxis;
 import com.vaadin.addon.charts.model.style.SolidColor;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
-import com.vaadin.data.Container.Filter;
-import com.vaadin.data.Item;
-import com.vaadin.data.util.BeanItemContainer;
-import com.vaadin.data.util.filter.Compare.Equal;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
-
-import javax.servlet.annotation.WebServlet;
-import java.util.Date;
+import com.vaadin.v7.addon.charts.model.ContainerDataSeries;
+import com.vaadin.v7.data.Container.Filter;
+import com.vaadin.v7.data.Item;
+import com.vaadin.v7.data.util.BeanItemContainer;
 
 @Theme("mytheme")
 @SuppressWarnings("serial")
